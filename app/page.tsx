@@ -96,8 +96,13 @@ export default function HomePage() {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Login Error:", err);
+      if (err.code === 'auth/unauthorized-domain') {
+        alert("Domain ini belum terdaftar di Firebase. Silakan tambahkan domain website Anda ke 'Authorized Domains' di Firebase Console.");
+      } else {
+        alert("Gagal login: " + err.message);
+      }
     }
   };
 
