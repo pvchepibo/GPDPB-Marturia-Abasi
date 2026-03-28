@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "warta": {
+      "title": "Warta Jemaat",
+      "description": "Informasi pengumuman dan kegiatan jemaat.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Judul warta" },
+        "content": { "type": "string", "description": "Isi warta" },
+        "date": { "type": "string", "format": "date-time", "description": "Tanggal warta" },
+        "category": { "type": "string", "enum": ["Ibadah", "Kegiatan", "Pengumuman"], "description": "Kategori warta" },
+        "authorUid": { "type": "string", "description": "UID pembuat warta" }
+      },
+      "required": ["title", "content", "date", "category", "authorUid"]
+    },
+    "keuangan": {
+      "title": "Laporan Keuangan",
+      "description": "Catatan kas masuk dan keluar gereja.",
+      "type": "object",
+      "properties": {
+        "description": { "type": "string", "description": "Keterangan transaksi" },
+        "amount": { "type": "number", "description": "Jumlah nominal" },
+        "type": { "type": "string", "enum": ["Masuk", "Keluar"], "description": "Jenis transaksi" },
+        "date": { "type": "string", "format": "date-time", "description": "Tanggal transaksi" },
+        "authorUid": { "type": "string", "description": "UID pencatat transaksi" }
+      },
+      "required": ["description", "amount", "type", "date", "authorUid"]
+    },
+    "user": {
+      "title": "User Profile",
+      "description": "Profil pengguna sistem.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "user"] }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/warta/{wartaId}": {
+      "schema": "warta",
+      "description": "Koleksi warta jemaat"
+    },
+    "/keuangan/{transactionId}": {
+      "schema": "keuangan",
+      "description": "Koleksi laporan keuangan"
+    },
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "Koleksi data pengguna"
+    }
+  }
+}
