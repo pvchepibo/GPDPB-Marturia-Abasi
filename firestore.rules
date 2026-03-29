@@ -69,5 +69,17 @@ service cloud.firestore {
       allow update: if isAdmin() && isValidKeuangan(request.resource.data);
       allow delete: if isAdmin();
     }
+
+    match /uploads/{uploadId} {
+      allow read: if isAdmin();
+      allow create: if true; // Anyone can upload (jemaat)
+      allow delete: if isAdmin();
+    }
+
+    match /prayer_requests/{requestId} {
+      allow read: if isAdmin();
+      allow create: if true; // Anyone can submit (jemaat)
+      allow delete: if isAdmin();
+    }
   }
 }

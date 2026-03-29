@@ -35,6 +35,30 @@
         "role": { "type": "string", "enum": ["admin", "user"] }
       },
       "required": ["email", "role"]
+    },
+    "upload": {
+      "title": "Upload Jemaat",
+      "description": "Metadata file yang diupload oleh jemaat.",
+      "type": "object",
+      "properties": {
+        "fileName": { "type": "string" },
+        "fileUrl": { "type": "string" },
+        "senderName": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fileName", "fileUrl", "senderName", "date"]
+    },
+    "prayer_request": {
+      "title": "Permohonan Doa",
+      "description": "Permohonan doa dari jemaat.",
+      "type": "object",
+      "properties": {
+        "senderName": { "type": "string" },
+        "request": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" }
+      },
+      "required": ["senderName", "request", "date"]
     }
   },
   "firestore": {
@@ -49,6 +73,14 @@
     "/users/{userId}": {
       "schema": "user",
       "description": "Koleksi data pengguna"
+    },
+    "/uploads/{uploadId}": {
+      "schema": "upload",
+      "description": "Koleksi file kiriman jemaat"
+    },
+    "/prayer_requests/{requestId}": {
+      "schema": "prayer_request",
+      "description": "Koleksi permohonan doa jemaat"
     }
   }
 }
